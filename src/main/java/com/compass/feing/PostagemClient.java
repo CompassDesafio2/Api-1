@@ -16,7 +16,6 @@ import com.compass.entidade.Postagem;
 //FeignClient
 public interface PostagemClient 
 {
-  
   @GetMapping(/*caminho*/)
   List<PostagemDTO> buscarTudo();
 
