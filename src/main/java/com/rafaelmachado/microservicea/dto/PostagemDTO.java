@@ -1,4 +1,4 @@
-package com.compass.dto;
+package com.rafaelmachado.microservicea.dto;
 
 import java.io.Serializable;
 

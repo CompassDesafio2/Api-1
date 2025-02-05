@@ -1,4 +1,4 @@
-package com.compass.entidade;
+package com.rafaelmachado.microservicea.entidade;
 
 import java.io.Serializable;
 

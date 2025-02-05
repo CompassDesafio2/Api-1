@@ -1,21 +1,24 @@
-package com.compass.servico;
+package com.rafaelmachado.microservicea.servico;
+
+
+import com.rafaelmachado.microservicea.dto.PostagemDTO;
+import com.rafaelmachado.microservicea.entidade.Postagem;
+import com.rafaelmachado.microservicea.feing.PostagemClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.compass.dto.PostagemDTO;
-import com.compass.entidade.Postagem;
-import com.compass.feing.PostagemClient;
-
-public class PostagemServico 
+@Service
+public class PostagemServico
 {
   @Autowired
   private PostagemClient postagemClient;
 
 
-  //criar exception personalizada 
+  //criar exception personalizada
   public List<PostagemDTO> buscarTudo()
   {
     List<PostagemDTO> postagem = postagemClient.buscarTudo();
@@ -50,37 +53,37 @@ public class PostagemServico
     }
   }
 
-   //exception do buscarPostagemPorId
-  public PostagemDTO atualizarPostagem(Long id, PostagemDTO postagemDTO)
-  {
-    PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
-                .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
-    
-    postagemAtualizada.getIdUsuario();
-    postagemAtualizada.getId();
-    postagemAtualizada.setTitulo(postagemDTO.getTitulo());
-    postagemAtualizada.setCorpoTexto(postagemDTO.getCorpoTexto());
+//  exception do buscarPostagemPorId
+//  public PostagemDTO atualizarPostagem(Long id, PostagemDTO postagemDTO)
+//  {
+//    PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
+//                .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
+//
+//    postagemAtualizada.getIdUsuario();
+//    postagemAtualizada.getId();
+//    postagemAtualizada.setTitulo(postagemDTO.getTitulo());
+//    postagemAtualizada.setCorpoTexto(postagemDTO.getCorpoTexto());
+//
+//    try
+//    {
+//      return postagemClient.atualizarPostagem(id, postagemAtualizada);
+//    }
+//    catch (Exception e)
+//    {
+//      throw new RuntimeException("Erro ao atualizar a postagem!");
+//    }
+//  }
 
-    try
-    {
-      return postagemClient.atualizarPostagem(id, postagemAtualizada);
-    }
-    catch (Exception e)
-    {
-      throw new RuntimeException("Erro ao atualizar a postagem!");
-    }
-  }
-
-  public void deletarPorId(Long id) 
+  public void deletarPorId(Long id)
   {
     postagemClient.buscarPostagemPorId(id)
         .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
 
-    try 
+    try
     {
       postagemClient.deletarPorId(id);
-    } 
-    catch (Exception e) 
+    }
+    catch (Exception e)
     {
       throw new RuntimeException("Erro ao deletar postagem");
     }
