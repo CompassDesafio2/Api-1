@@ -57,8 +57,8 @@ public class PostagemServico
     PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
                 .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
 
-    postagemAtualizada.setTitulo(postagemDTO.getTitulo());
-    postagemAtualizada.setCorpoTexto(postagemDTO.getCorpoTexto());
+    postagemAtualizada.setTitle(postagemDTO.getTitle());
+    postagemAtualizada.setBody(postagemDTO.getBody());
 
     try
     {

@@ -19,14 +19,9 @@ public class PostagemControlador
   @Autowired
   private PostagemServico postagemServico;
 
-  private final PostagemMapper postagemMapper;
 
-  public PostagemControlador(PostagemMapper postagemMapper)
-  {
-    this.postagemMapper = postagemMapper;
-  }
 
-  @GetMapping("/todasPostagens")
+    @GetMapping("/todasPostagens")
   public ResponseEntity<List<PostagemDTO>> getTodasPostagens()
   {
     List<PostagemDTO> postagens = postagemServico.buscarTudo();
@@ -51,8 +46,8 @@ public class PostagemControlador
   @PostMapping
   public ResponseEntity<PostagemDTO> criarPostagem(@RequestBody PostagemDTO dto)
   {
-    Postagem postagemCriada = postagemServico.criarPostagem(postagemMapper.paraPostagem(dto));
-    return ResponseEntity.status(HttpStatus.CREATED).body(postagemMapper.paraDTO(postagemCriada)); // 201 Created
+    Postagem postagemCriada = postagemServico.criarPostagem(PostagemMapper.paraPostagem(dto));
+    return ResponseEntity.status(HttpStatus.CREATED).body(PostagemMapper.paraDTO(postagemCriada)); // 201 Created
   }
 
   @PutMapping("/{id}")
