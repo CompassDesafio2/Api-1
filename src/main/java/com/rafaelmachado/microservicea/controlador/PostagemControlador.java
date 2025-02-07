@@ -2,8 +2,9 @@ package com.rafaelmachado.microservicea.controlador;
 
 import java.util.List;
 
-
 import com.rafaelmachado.microservicea.dto.PostagemDTO;
+import com.rafaelmachado.microservicea.entidade.Postagem;
+import com.rafaelmachado.microservicea.mapper.PostagemMapper;
 import com.rafaelmachado.microservicea.servico.PostagemServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping( value = "/api/postagens")
 public class PostagemControlador
 {
-//  @Autowired
+  @Autowired
   private PostagemServico postagemServico;
 
+  private final PostagemMapper postagemMapper;
 
+  public PostagemControlador(PostagemMapper postagemMapper)
+  {
+    this.postagemMapper = postagemMapper;
+  }
 
   @GetMapping("/todasPostagens")
   public ResponseEntity<List<PostagemDTO>> getTodasPostagens()
@@ -41,25 +47,25 @@ public class PostagemControlador
     }
     return ResponseEntity.ok(postagem); // 200 OK
   }
-/*
+
   @PostMapping
   public ResponseEntity<PostagemDTO> criarPostagem(@RequestBody PostagemDTO dto)
   {
-    PostagemDTO postagemCriada = postagemServico.criarPostagem(dto);
-    return ResponseEntity.status(HttpStatus.CREATED).body(postagemCriada); // 201 Created
+    Postagem postagemCriada = postagemServico.criarPostagem(postagemMapper.paraPostagem(dto));
+    return ResponseEntity.status(HttpStatus.CREATED).body(postagemMapper.paraDTO(postagemCriada)); // 201 Created
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<PostagemDTO> atualizarPostagem(@PathVariable Long id, @RequestBody PostagemDTO dto)
+  public ResponseEntity<PostagemDTO> atualizarPostagem(@PathVariable Long id, @RequestBody PostagemDTO postagemDTO)
   {
-    PostagemDTO postagemAtualizada = postagemServico.atualizarPostagem(id, dto);
+    PostagemDTO postagemAtualizada = postagemServico.atualizarPostagem(id, postagemDTO); //possível erro
     if (postagemAtualizada == null)
     {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found caso a postagem não seja encontrada
     }
     return ResponseEntity.status(HttpStatus.OK).body(postagemAtualizada); // 200 OK
   }
-     */
+     
 
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<Void> deletarPostagemPorId(@PathVariable Long id)
@@ -67,5 +73,4 @@ public class PostagemControlador
     postagemServico.deletarPorId(id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // 204 No Content para deleção bem-sucedida
   }
-
 }

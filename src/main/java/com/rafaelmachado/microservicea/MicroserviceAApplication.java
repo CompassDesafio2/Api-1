@@ -11,7 +11,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class MicroserviceAApplication  implements CommandLineRunner {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         SpringApplication.run(MicroserviceAApplication.class, args);
     }
 
@@ -20,7 +21,8 @@ public class MicroserviceAApplication  implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) throws Exception 
+    {
         this.postagemClient.buscarTudo();
         System.out.println(this.postagemClient.buscarTudo());
 

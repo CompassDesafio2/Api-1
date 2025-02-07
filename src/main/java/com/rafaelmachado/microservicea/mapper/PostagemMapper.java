@@ -14,8 +14,4 @@ public interface PostagemMapper
   PostagemDTO paraDTO(Postagem postagem);
 
   Postagem paraPostagem(PostagemDTO dto);
-
-  AtualizarPostagemDTO AtualizarPostagemParaDTO(PostagemDTO postagemDTO);
-
-  PostagemDTO atualizarParaPostagem(AtualizarPostagemDTO dto);
 }

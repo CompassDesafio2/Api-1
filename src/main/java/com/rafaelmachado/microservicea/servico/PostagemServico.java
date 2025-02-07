@@ -1,12 +1,10 @@
 package com.rafaelmachado.microservicea.servico;
 
-
 import com.rafaelmachado.microservicea.dto.PostagemDTO;
 import com.rafaelmachado.microservicea.entidade.Postagem;
 import com.rafaelmachado.microservicea.feing.PostagemClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -54,25 +52,23 @@ public class PostagemServico
   }
 
 //  exception do buscarPostagemPorId
-//  public PostagemDTO atualizarPostagem(Long id, PostagemDTO postagemDTO)
-//  {
-//    PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
-//                .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
-//
-//    postagemAtualizada.getIdUsuario();
-//    postagemAtualizada.getId();
-//    postagemAtualizada.setTitulo(postagemDTO.getTitulo());
-//    postagemAtualizada.setCorpoTexto(postagemDTO.getCorpoTexto());
-//
-//    try
-//    {
-//      return postagemClient.atualizarPostagem(id, postagemAtualizada);
-//    }
-//    catch (Exception e)
-//    {
-//      throw new RuntimeException("Erro ao atualizar a postagem!");
-//    }
-//  }
+  public PostagemDTO atualizarPostagem(Long id, PostagemDTO postagemDTO)
+  {
+    PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
+                .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
+
+    postagemAtualizada.setTitulo(postagemDTO.getTitulo());
+    postagemAtualizada.setCorpoTexto(postagemDTO.getCorpoTexto());
+
+    try
+    {
+      return postagemClient.atualizarPostagem(id, postagemAtualizada);
+    }
+    catch (Exception e)
+    {
+      throw new RuntimeException("Erro ao atualizar a postagem!");
+    }
+  }
 
   public void deletarPorId(Long id)
   {
