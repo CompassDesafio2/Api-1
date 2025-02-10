@@ -2,61 +2,66 @@ package com.rafaelmachado.microservicea.entidade;
 
 import java.io.Serializable;
 
-import lombok.*;
-
-@NoArgsConstructor
-@Getter
-@Setter
-@AllArgsConstructor
 public class Postagem implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   private String id;
-  private String userId;
-  private String title;
-  private String body;
+  private String idUsuario;
+  private String titulo;
+  private String corpoTexto;
 
-  public Postagem() {
+  public Postagem() 
+  {
+
   }
 
-  public Postagem(String id, String userId, String title, String body) {
+  public Postagem(String id, String idUsuario, String titulo, String corpoTexto) 
+  {
     this.id = id;
-    this.userId = userId;
-    this.title = title;
-    this.body = body;
+    this.idUsuario = idUsuario;
+    this.titulo = titulo;
+    this.corpoTexto = corpoTexto;
   }
 
-  public String getId() {
+  public String getId() 
+  {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(String id) 
+  {
     this.id = id;
   }
 
-  public String getUserId() {
-    return userId;
+  public String getIdUsuario() 
+  {
+    return idUsuario;
   }
 
-  public void setUserId(String userId) {
-    this.userId = userId;
+  public void setIdUsuario(String idUsuario) 
+  {
+    this.idUsuario = idUsuario;
   }
 
-  public String getTitle() {
-    return title;
+  public String getTitulo() 
+  {
+    return titulo;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setTitulo(String titulo) 
+  {
+    this.titulo = titulo;
   }
 
-  public String getBody() {
-    return body;
+  public String getCorpoTexto() 
+  {
+    return corpoTexto;
   }
 
-  public void setBody(String body) {
-    this.body = body;
+  public void setCorpoTexto(String corpoTexto) 
+  {
+    this.corpoTexto = corpoTexto;
   }
 
   @Override
