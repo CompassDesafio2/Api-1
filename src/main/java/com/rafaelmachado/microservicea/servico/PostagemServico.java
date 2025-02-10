@@ -14,21 +14,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PostagemServico
-{
+public class PostagemServico {
   @Autowired
   private PostagemClient postagemClient;
 
-  public List<PostagemDTO> buscarTudo()
-  {
+
+  // criar exception personalizada
+  public List<PostagemDTO> buscarTudo() {
     List<PostagemDTO> postagem = postagemClient.buscarTudo();
 
-    if (postagem == null || postagem.isEmpty())
-    {
-      throw new ErroBuscaExcecao("Nenhuma postagem encontrada!");
+    if (postagem == null || postagem.isEmpty()) {
+      throw new RuntimeException("Nenhuma postagem encontrada!");
+
+     
     }
     return postagem;
   }
+
 
   public PostagemDTO buscarPostagemPorId(Long id)
   {
@@ -54,27 +56,27 @@ public class PostagemServico
     PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
                 .orElseThrow(() -> new ErroBuscaExcecao("Postagem não encontrada!"));
 
+
     postagemAtualizada.setTitle(postagemDTO.getTitle());
     postagemAtualizada.setBody(postagemDTO.getBody());
 
-    try
-    {
+    try {
       return postagemClient.atualizarPostagem(id, postagemAtualizada);
+
     }
     catch (Exception e)
     {
       throw new ErroAtualizarExcecao("Erro ao atualizar a postagem!");
+
     }
   }
-
-  public void deletarPorId(Long id)
-  {
+  public void deletarPorId(String id) {
     postagemClient.buscarPostagemPorId(id)
-        .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
+            .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
 
-    try
-    {
+    try {
       postagemClient.deletarPorId(id);
+
     }
     catch (Exception e)
     {
