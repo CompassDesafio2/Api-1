@@ -1,6 +1,7 @@
 package com.rafaelmachado.microservicea.excecao;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import org.springframework.context.MessageSource;
@@ -23,8 +24,7 @@ public class ErrorMessage {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Map<String, String> error;
 
-    public ErrorMessage(HttpServletRequest request, HttpStatus status, String message) 
-    {
+    public ErrorMessage(HttpServletRequest request, HttpStatus status, String message) {
         this.path = request.getRequestURI();
         this.method = request.getMethod();
         this.status = status.value();
@@ -33,12 +33,10 @@ public class ErrorMessage {
 
     }
 
-    public ErrorMessage() 
-    {
+    public ErrorMessage() {
     }
 
-    public ErrorMessage(HttpServletRequest request, HttpStatus status, String message, BindingResult result) 
-    {
+    public ErrorMessage(HttpServletRequest request, HttpStatus status, String message, BindingResult result) {
         this.path = request.getRequestURI();
         this.method = request.getMethod();
         this.status = status.value();
@@ -48,8 +46,7 @@ public class ErrorMessage {
 
     }
 
-    public ErrorMessage(HttpServletRequest request, HttpStatus status, String invalidField, BindingResult result, MessageSource messageSource) 
-    {
+    public ErrorMessage(HttpServletRequest request, HttpStatus status, String invalidField, BindingResult result, MessageSource messageSource) {
         this.path = request.getRequestURI();
         this.method = request.getMethod();
         this.status = status.value();
@@ -58,23 +55,22 @@ public class ErrorMessage {
         addErrors(result, messageSource, request.getLocale());
     }
 
-    private void addErrors(BindingResult result, MessageSource messageSource, Locale locale) 
-    {
+    private void addErrors(BindingResult result, MessageSource messageSource, Locale locale) {
         this.error = new HashMap<>();
-        for(FieldError fieldError : result.getFieldErrors()) 
-        {
+        for(FieldError fieldError : result.getFieldErrors()) {
             String code = fieldError.getCodes()[0];
             String message = messageSource.getMessage(code, fieldError.getArguments(), locale);
             this.error.put(fieldError.getField(), message);
         }
     }
 
-    private void addErrors(BindingResult result) 
-    {
+    private void addErrors(BindingResult result) {
         this.error = new HashMap<>();
-        for( FieldError fieldError : result.getFieldErrors()) 
-        {
+        for( FieldError fieldError : result.getFieldErrors()) {
             this.error.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
+
     }
+
+
 }
