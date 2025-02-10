@@ -1,6 +1,7 @@
 package com.rafaelmachado.microservicea.controlador;
 
 import java.util.List;
+
 import com.rafaelmachado.microservicea.dto.PostagemDTO;
 import com.rafaelmachado.microservicea.entidade.Postagem;
 import com.rafaelmachado.microservicea.mapper.PostagemMapper;
@@ -17,6 +18,7 @@ public class PostagemControlador
 {
   @Autowired
   private PostagemServico postagemServico;
+
 
 
   @GetMapping("/todasPostagens")
@@ -51,13 +53,14 @@ public class PostagemControlador
   @PutMapping("/{id}")
   public ResponseEntity<PostagemDTO> atualizarPostagem(@PathVariable Long id, @RequestBody PostagemDTO postagemDTO)
   {
-    PostagemDTO postagemAtualizada = postagemServico.atualizarPostagem(id, postagemDTO); 
+    PostagemDTO postagemAtualizada = postagemServico.atualizarPostagem(id, postagemDTO); //possível erro
     if (postagemAtualizada == null)
     {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found caso a postagem não seja encontrada
     }
     return ResponseEntity.status(HttpStatus.OK).body(postagemAtualizada); // 200 OK
-  }   
+  }
+     
 
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<Void> deletarPostagemPorId(@PathVariable Long id)

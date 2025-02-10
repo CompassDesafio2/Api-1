@@ -5,6 +5,7 @@ import com.rafaelmachado.microservicea.entidade.Postagem;
 import com.rafaelmachado.microservicea.feing.PostagemClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ public class PostagemServico
 {
   @Autowired
   private PostagemClient postagemClient;
+
 
   //criar exception personalizada
   public List<PostagemDTO> buscarTudo()
@@ -31,8 +33,10 @@ public class PostagemServico
   {
     Optional<PostagemDTO> postagem = postagemClient.buscarPostagemPorId(id);
     return postagem
-          .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
+          .orElseThrow(()-> new RuntimeException("Postagem não encontrada!"));
   }
+
+  //GET COMENTARIOS da POSTAGEM
 
   //criar exception personalizada
   public Postagem criarPostagem(Postagem postagem)
@@ -53,7 +57,7 @@ public class PostagemServico
     PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
                 .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
 
-    postagemAtualizada.setTittle(postagemDTO.getTittle());
+    postagemAtualizada.setTitle(postagemDTO.getTitle());
     postagemAtualizada.setBody(postagemDTO.getBody());
 
     try
@@ -77,7 +81,7 @@ public class PostagemServico
     }
     catch (Exception e)
     {
-      throw new RuntimeException("Erro ao deletar postagem!");
+      throw new RuntimeException("Erro ao deletar postagem");
     }
   }
 }
