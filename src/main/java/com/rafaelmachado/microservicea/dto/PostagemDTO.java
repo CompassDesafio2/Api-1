@@ -7,20 +7,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class PostagemDTO implements Serializable
 {
   private String id;
-  private String idUsuario;
-  private String titulo;
-  private String corpoTexto;
+  private String userId;
+  private String tittle;
+  private String body;
 
   public PostagemDTO() 
   {
 
   }
 
-  public PostagemDTO(String id, String idUsuario, String titulo, String corpoTexto) 
+  public PostagemDTO(String id, String userId, String tittle, String body) 
   {
-    this.idUsuario = idUsuario;
-    this.titulo = titulo;
-    this.corpoTexto = corpoTexto;
+    this.userId = userId;
+    this.tittle = tittle;
+    this.body = body;
   }
 
   public String getId() 
@@ -33,33 +33,33 @@ public class PostagemDTO implements Serializable
     this.id = id;
   }
 
-  public String getIdUsuario() 
+  public String getUserId() 
   {
-    return idUsuario;
+    return userId;
   }
 
-  public void setIdUsuario(String idUsuario) 
+  public void setUserId(String userId) 
   {
-    this.idUsuario = idUsuario;
+    this.userId = userId;
   }
 
-  public String getTitulo() 
+  public String getTittle() 
   {
-    return titulo;
+    return tittle;
   }
 
-  public void setTitulo(String titulo) 
+  public void setTittle(String tittle) 
   {
-    this.titulo = titulo;
+    this.tittle = tittle;
   }
 
-  public String getCorpoTexto() 
+  public String getBody() 
   {
-    return corpoTexto;
+    return body;
   }
 
-  public void setCorpoTexto(String corpoTexto) 
+  public void setBody(String body) 
   {
-    this.corpoTexto = corpoTexto;
+    this.body = body;
   }
 }
