@@ -13,58 +13,46 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "https://editor.swagger.io")
-@RequestMapping( value = "/api/postagens")
-public class PostagemControlador
-{
+@RequestMapping(value = "/api/postagens")
+public class PostagemControlador {
   @Autowired
   private PostagemServico postagemServico;
 
-
-
   @GetMapping("/todasPostagens")
-  public ResponseEntity<List<PostagemDTO>> getTodasPostagens()
-  {
+  public ResponseEntity<List<PostagemDTO>> getTodasPostagens() {
     List<PostagemDTO> postagens = postagemServico.buscarTudo();
-    if (postagens.isEmpty())
-    {
+    if (postagens.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // 204 No Content caso não haja postagens
     }
     return ResponseEntity.ok().body(postagens); // 200 OK
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<PostagemDTO> getBuscaPostagemPorId(@PathVariable Long id)
-  {
+  public ResponseEntity<PostagemDTO> getBuscaPostagemPorId(@PathVariable String id) {
     PostagemDTO postagem = postagemServico.buscarPostagemPorId(id);
-    if (postagem == null)
-    {
+    if (postagem == null) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found caso a postagem não exista
     }
     return ResponseEntity.ok(postagem); // 200 OK
   }
 
   @PostMapping
-  public ResponseEntity<PostagemDTO> criarPostagem(@RequestBody PostagemDTO dto)
-  {
+  public ResponseEntity<PostagemDTO> criarPostagem(@RequestBody PostagemDTO dto) {
     Postagem postagemCriada = postagemServico.criarPostagem(PostagemMapper.paraPostagem(dto));
     return ResponseEntity.status(HttpStatus.CREATED).body(PostagemMapper.paraDTO(postagemCriada)); // 201 Created
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<PostagemDTO> atualizarPostagem(@PathVariable Long id, @RequestBody PostagemDTO postagemDTO)
-  {
-    PostagemDTO postagemAtualizada = postagemServico.atualizarPostagem(id, postagemDTO); //possível erro
-    if (postagemAtualizada == null)
-    {
+  public ResponseEntity<PostagemDTO> atualizarPostagem(@PathVariable String id, @RequestBody PostagemDTO postagemDTO) {
+    PostagemDTO postagemAtualizada = postagemServico.atualizarPostagem(id, postagemDTO); // possível erro
+    if (postagemAtualizada == null) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 Not Found caso a postagem não seja encontrada
     }
     return ResponseEntity.status(HttpStatus.OK).body(postagemAtualizada); // 200 OK
   }
-     
 
   @DeleteMapping(value = "/{id}")
-  public ResponseEntity<Void> deletarPostagemPorId(@PathVariable Long id)
-  {
+  public ResponseEntity<Void> deletarPostagemPorId(@PathVariable String id) {
     postagemServico.deletarPorId(id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // 204 No Content para deleção bem-sucedida
   }
