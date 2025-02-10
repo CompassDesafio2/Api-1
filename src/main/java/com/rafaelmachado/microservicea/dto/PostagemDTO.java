@@ -18,7 +18,6 @@ public class PostagemDTO implements Serializable
 
   public PostagemDTO(String id, String idUsuario, String titulo, String corpoTexto) 
   {
-    this.id = id;
     this.idUsuario = idUsuario;
     this.titulo = titulo;
     this.corpoTexto = corpoTexto;
