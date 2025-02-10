@@ -8,7 +8,7 @@ public class Postagem implements Serializable
 
   private String id;
   private String userId;
-  private String tittle;
+  private String title;
   private String body;
 
   public Postagem() 
@@ -16,20 +16,15 @@ public class Postagem implements Serializable
 
   }
 
-  public Postagem(String id, String userId, String tittle, String body) 
+  public Postagem(String id, String userId, String title, String body)
   {
     this.id = id;
     this.userId = userId;
-    this.tittle = tittle;
+    this.title = title;
     this.body = body;
   }
 
-  public String getId() 
-  {
-    return id;
-  }
-
-  public void setId(String id) 
+  public void setId(String id)
   {
     this.id = id;
   }
@@ -46,12 +41,12 @@ public class Postagem implements Serializable
 
   public String getTittle() 
   {
-    return tittle;
+    return title;
   }
 
-  public void setTittle(String tittle) 
+  public void setTittle(String title)
   {
-    this.tittle = tittle;
+    this.title = title;
   }
 
   public String getBody() 
