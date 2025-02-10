@@ -18,6 +18,7 @@ public class PostagemControlador
   @Autowired
   private PostagemServico postagemServico;
 
+
   @GetMapping("/todasPostagens")
   public ResponseEntity<List<PostagemDTO>> getTodasPostagens()
   {
