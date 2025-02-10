@@ -4,10 +4,9 @@ import java.io.Serializable;
 
 import lombok.*;
 
-@NoArgsConstructor
+
 @Getter
 @Setter
-@AllArgsConstructor
 public class Postagem implements Serializable
 {
   private static final long serialVersionUID = 1L;

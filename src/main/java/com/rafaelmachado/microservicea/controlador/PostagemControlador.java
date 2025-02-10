@@ -21,7 +21,7 @@ public class PostagemControlador
 
 
 
-    @GetMapping("/todasPostagens")
+  @GetMapping("/todasPostagens")
   public ResponseEntity<List<PostagemDTO>> getTodasPostagens()
   {
     List<PostagemDTO> postagens = postagemServico.buscarTudo();
