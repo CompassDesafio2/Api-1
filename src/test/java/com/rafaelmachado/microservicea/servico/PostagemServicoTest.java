@@ -60,24 +60,24 @@ public class PostagemServicoTest {
     public void buscarPostagemPorId() {
         // Arrange
         PostagemDTO mockPostagem = new PostagemDTO("1", "10", "Title1", "Body1");
-        when(postagemClient.buscarPostagemPorId(1L)).thenReturn(Optional.of(mockPostagem));
+        when(postagemClient.buscarPostagemPorId("1")).thenReturn(Optional.of(mockPostagem));
 
         // Act
-        PostagemDTO result = postagemServico.buscarPostagemPorId(1L);
+        PostagemDTO result = postagemServico.buscarPostagemPorId("1");
 
         // Assert
         assertNotNull(result);
         assertEquals("1", result.getId());
-        verify(postagemClient, times(1)).buscarPostagemPorId(1L);
+        verify(postagemClient, times(1)).buscarPostagemPorId("1");
     }
 
     @Test(expected = RuntimeException.class)
     public void buscarPostagemPorIdComErro() {
         // Arrange
-        when(postagemClient.buscarPostagemPorId(1L)).thenReturn(Optional.empty());
+        when(postagemClient.buscarPostagemPorId("1")).thenReturn(Optional.empty());
 
         // Act
-        postagemServico.buscarPostagemPorId(1L);
+        postagemServico.buscarPostagemPorId("1");
     }
 
     @Test
@@ -109,49 +109,49 @@ public class PostagemServicoTest {
     public void atualizarPostagem() {
         // Arrange
         PostagemDTO mockPostagem = new PostagemDTO("1", "10", "Updated Title", "Updated Body");
-        when(postagemClient.buscarPostagemPorId(1L)).thenReturn(Optional.of(mockPostagem));
-        when(postagemClient.atualizarPostagem(eq(1L), any(PostagemDTO.class))).thenReturn(mockPostagem);
+        when(postagemClient.buscarPostagemPorId("1")).thenReturn(Optional.of(mockPostagem));
+        when(postagemClient.atualizarPostagem(eq("1"), any(PostagemDTO.class))).thenReturn(mockPostagem);
 
         // Act
-        PostagemDTO result = postagemServico.atualizarPostagem(1L, mockPostagem);
+        PostagemDTO result = postagemServico.atualizarPostagem("1", mockPostagem);
 
         // Assert
         assertNotNull(result);
         assertEquals("Updated Title", result.getTitle());
-        verify(postagemClient, times(1)).buscarPostagemPorId(1L);
-        verify(postagemClient, times(1)).atualizarPostagem(eq(1L), any(PostagemDTO.class));
+        verify(postagemClient, times(1)).buscarPostagemPorId("1");
+        verify(postagemClient, times(1)).atualizarPostagem(eq("1"), any(PostagemDTO.class));
     }
 
     @Test(expected = RuntimeException.class)
     public void atualizarPostagemComErro() {
         // Arrange
         PostagemDTO mockPostagem = new PostagemDTO("1", "10", "Title1", "Body1");
-        when(postagemClient.buscarPostagemPorId(1L)).thenReturn(Optional.empty());
+        when(postagemClient.buscarPostagemPorId("1")).thenReturn(Optional.empty());
 
         // Act
-        postagemServico.atualizarPostagem(1L, mockPostagem);
+        postagemServico.atualizarPostagem("1", mockPostagem);
     }
 
     @Test
     public void deletarPorId() {
         // Arrange
         PostagemDTO mockPostagem = new PostagemDTO("1", "10", "Title1", "Body1");
-        when(postagemClient.buscarPostagemPorId(1L)).thenReturn(Optional.of(mockPostagem));
+        when(postagemClient.buscarPostagemPorId("1")).thenReturn(Optional.of(mockPostagem));
 
         // Act
-        postagemServico.deletarPorId(1L);
+        postagemServico.deletarPorId("1");
 
         // Assert
-        verify(postagemClient, times(1)).buscarPostagemPorId(1L);
-        verify(postagemClient, times(1)).deletarPorId(1L);
+        verify(postagemClient, times(1)).buscarPostagemPorId("1");
+        verify(postagemClient, times(1)).deletarPorId("1");
     }
 
     @Test(expected = RuntimeException.class)
     public void deletarPorIdComErro() {
         // Arrange
-        when(postagemClient.buscarPostagemPorId(1L)).thenReturn(Optional.empty());
+        when(postagemClient.buscarPostagemPorId("1")).thenReturn(Optional.empty());
 
         // Act
-        postagemServico.deletarPorId(1L);
+        postagemServico.deletarPorId("1");
     }
 }
