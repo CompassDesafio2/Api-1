@@ -2,59 +2,65 @@ package com.rafaelmachado.microservicea.entidade;
 
 import java.io.Serializable;
 
-import lombok.*;
-
-
-@Getter
-@Setter
 public class Postagem implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   private String id;
   private String userId;
-  private String title;
+  private String tittle;
   private String body;
 
-  public Postagem() {
+  public Postagem() 
+  {
+
   }
 
-  public Postagem(String id, String userId, String title, String body) {
+  public Postagem(String id, String userId, String tittle, String body) 
+  {
     this.id = id;
     this.userId = userId;
-    this.title = title;
+    this.tittle = tittle;
     this.body = body;
   }
 
-  public String getId() {
+  public String getId() 
+  {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(String id) 
+  {
     this.id = id;
   }
 
-  public String getUserId() {
+  public String getUserId() 
+  {
     return userId;
   }
 
-  public void setUserId(String userId) {
+  public void setUserId(String userId) 
+  {
     this.userId = userId;
   }
 
-  public String getTitle() {
-    return title;
+  public String getTittle() 
+  {
+    return tittle;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setTittle(String tittle) 
+  {
+    this.tittle = tittle;
   }
 
-  public String getBody() {
+  public String getBody() 
+  {
     return body;
   }
 
-  public void setBody(String body) {
+  public void setBody(String body) 
+  {
     this.body = body;
   }
 
