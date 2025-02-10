@@ -4,6 +4,7 @@ import com.rafaelmachado.microservicea.dto.PostagemDTO;
 import com.rafaelmachado.microservicea.entidade.Postagem;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,14 +16,14 @@ public interface PostagemClient
   List<PostagemDTO> buscarTudo();
 
   @GetMapping("/posts/{id}")
-  Optional<PostagemDTO> buscarPostagemPorId(@PathVariable("id") Long id);
+  Optional<PostagemDTO> buscarPostagemPorId(@PathVariable("id") String id);
 
   @PostMapping("/posts")
   Postagem criarPostagem(@RequestBody Postagem postagem);
 
   @PutMapping("/posts/{id}")
-  PostagemDTO atualizarPostagem(@PathVariable("id") Long id, @RequestBody PostagemDTO postagemDTO);
+  PostagemDTO atualizarPostagem(@PathVariable("id") String id, @RequestBody PostagemDTO postagemDTO);
 
   @DeleteMapping("/posts/{id}")
-  void deletarPorId(@PathVariable("id") Long id);
+  void deletarPorId(@PathVariable("id") String id);
 }
