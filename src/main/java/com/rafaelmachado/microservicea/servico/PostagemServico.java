@@ -32,7 +32,7 @@ public class PostagemServico {
   }
 
 
-  public PostagemDTO buscarPostagemPorId(Long id)
+  public PostagemDTO buscarPostagemPorId(String id)
   {
     Optional<PostagemDTO> postagem = postagemClient.buscarPostagemPorId(id);
     return postagem
@@ -51,7 +51,7 @@ public class PostagemServico {
     }
   }
 
-  public PostagemDTO atualizarPostagem(Long id, PostagemDTO postagemDTO)
+  public PostagemDTO atualizarPostagem(String id, PostagemDTO postagemDTO)
   {
     PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
                 .orElseThrow(() -> new ErroBuscaExcecao("Postagem não encontrada!"));
