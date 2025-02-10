@@ -6,16 +6,10 @@ import lombok.NoArgsConstructor;
 
 import com.rafaelmachado.microservicea.dto.PostagemDTO;
 import com.rafaelmachado.microservicea.entidade.Postagem;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+
 import org.modelmapper.ModelMapper;
 
 
-//@Mapper(componentModel = "spring")
-//public interface PostagemMapper {
-//  PostagemDTO paraDTO(Postagem postagem);
-//  Postagem paraPostagem(PostagemDTO dto);
-//}
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostagemMapper {
