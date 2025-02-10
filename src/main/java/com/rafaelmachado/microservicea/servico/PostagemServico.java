@@ -2,6 +2,10 @@ package com.rafaelmachado.microservicea.servico;
 
 import com.rafaelmachado.microservicea.dto.PostagemDTO;
 import com.rafaelmachado.microservicea.entidade.Postagem;
+import com.rafaelmachado.microservicea.excecao.ErroAtualizarExcecao;
+import com.rafaelmachado.microservicea.excecao.ErroBuscaExcecao;
+import com.rafaelmachado.microservicea.excecao.ErroCriacaoExcecao;
+import com.rafaelmachado.microservicea.excecao.ErroDeletarExcecao;
 import com.rafaelmachado.microservicea.feing.PostagemClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,30 +19,24 @@ public class PostagemServico
   @Autowired
   private PostagemClient postagemClient;
 
-
-  //criar exception personalizada
   public List<PostagemDTO> buscarTudo()
   {
     List<PostagemDTO> postagem = postagemClient.buscarTudo();
 
     if (postagem == null || postagem.isEmpty())
     {
-      throw new RuntimeException("Nenhuma postagem encontrada!");
+      throw new ErroBuscaExcecao("Nenhuma postagem encontrada!");
     }
     return postagem;
   }
 
-  //criar exception personalizada
   public PostagemDTO buscarPostagemPorId(Long id)
   {
     Optional<PostagemDTO> postagem = postagemClient.buscarPostagemPorId(id);
     return postagem
-          .orElseThrow(()-> new RuntimeException("Postagem não encontrada!"));
+          .orElseThrow(()-> new ErroBuscaExcecao("Postagem não encontrada!"));
   }
 
-  //GET COMENTARIOS da POSTAGEM
-
-  //criar exception personalizada
   public Postagem criarPostagem(Postagem postagem)
   {
     try
@@ -47,15 +45,14 @@ public class PostagemServico
     }
     catch (Exception e)
     {
-      throw new RuntimeException("Erro ao criar postagem!");
+      throw new ErroCriacaoExcecao("Erro ao criar postagem!");
     }
   }
 
-//  exception do buscarPostagemPorId
   public PostagemDTO atualizarPostagem(Long id, PostagemDTO postagemDTO)
   {
     PostagemDTO postagemAtualizada = postagemClient.buscarPostagemPorId(id)
-                .orElseThrow(() -> new RuntimeException("Postagem não encontrada!"));
+                .orElseThrow(() -> new ErroBuscaExcecao("Postagem não encontrada!"));
 
     postagemAtualizada.setTitle(postagemDTO.getTitle());
     postagemAtualizada.setBody(postagemDTO.getBody());
@@ -66,7 +63,7 @@ public class PostagemServico
     }
     catch (Exception e)
     {
-      throw new RuntimeException("Erro ao atualizar a postagem!");
+      throw new ErroAtualizarExcecao("Erro ao atualizar a postagem!");
     }
   }
 
@@ -81,7 +78,7 @@ public class PostagemServico
     }
     catch (Exception e)
     {
-      throw new RuntimeException("Erro ao deletar postagem");
+      throw new ErroDeletarExcecao("Erro ao deletar postagem");
     }
   }
 }
